@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background-color: #F5F3EF;
+  margin: 0;
+  padding: 0;
+}
+
+/* Toast overrides */
+.Toastify__toast {
+  font-size: 14px;
+  border-radius: 8px;
+  min-height: auto;
+  padding: 16px;
+}
+
+.Toastify__toast-container {
+  width: auto;
+  max-width: 420px;
+}
+
+.Toastify__toast--success {
+  background-color: #4CAF50;
+}
+
+.Toastify__toast--error {
+  background-color: #D32F2F;
+}
+
+.Toastify__toast--warning {
+  background-color: #FF9800;
+}
+
+.Toastify__toast--info {
+  background-color: #2196F3;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F3EF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6B8E23;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2D5016;
+}

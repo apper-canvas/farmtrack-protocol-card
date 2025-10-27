@@ -1,0 +1,62 @@
+[
+  {
+    "Id": 1,
+    "farmId": "1",
+    "title": "Water tomato plants",
+    "description": "Check drip irrigation system and water tomato plants in North Field A. Monitor soil moisture levels.",
+    "dueDate": "2024-12-15T09:00:00.000Z",
+    "priority": "high",
+    "completed": false,
+    "completedAt": null
+  },
+  {
+    "Id": 2,
+    "farmId": "1", 
+    "title": "Harvest lettuce",
+    "description": "Harvest mature romaine lettuce from South Field B. Cut in early morning for best quality.",
+    "dueDate": "2024-12-14T07:00:00.000Z",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null
+  },
+  {
+    "Id": 3,
+    "farmId": "2",
+    "title": "Apply fertilizer to corn",
+    "description": "Side-dress corn plants with nitrogen fertilizer. Apply 50 lbs per acre.",
+    "dueDate": "2024-12-16T10:00:00.000Z",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null
+  },
+  {
+    "Id": 4,
+    "farmId": "2",
+    "title": "Weed carrot beds",
+    "description": "Hand weed carrot beds in West Field 2. Be careful not to damage carrot tops.",
+    "dueDate": "2024-12-13T08:00:00.000Z",
+    "priority": "high",
+    "completed": false,
+    "completedAt": null
+  },
+  {
+    "Id": 5,
+    "farmId": "3",
+    "title": "Prune apple trees",
+    "description": "Winter pruning of apple trees in Orchard Block C. Remove dead, diseased, and crossing branches.",
+    "dueDate": "2024-12-20T11:00:00.000Z",
+    "priority": "low",
+    "completed": false,
+    "completedAt": null
+  },
+  {
+    "Id": 6,
+    "farmId": "1",
+    "title": "Soil preparation",
+    "description": "Prepare soil for spring planting in empty field sections.",
+    "dueDate": "2024-12-10T10:00:00.000Z",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2024-12-10T14:30:00.000Z"
+  }
+]
