@@ -123,10 +123,9 @@ function Header() {
                   className="w-full justify-start text-gray-600 hover:text-gray-900 mt-4"
                   onClick={handleLogout}
                 >
-                  <ApperIcon name="LogOut" className="w-4 h-4 mr-2" />
+<ApperIcon name="LogOut" className="w-4 h-4 mr-2" />
                   Logout
                 </Button>
-                ))}
               </nav>
             </div>
           </div>
