@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
 import NavItem from "@/components/molecules/NavItem";
+import { useAuth } from "@/layouts/Root";
 import { cn } from "@/utils/cn";
 
-const Header = () => {
+function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { logout } = useAuth();
 
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
   const navigation = [
     { name: "Dashboard", to: "", icon: "LayoutDashboard" },
     { name: "Farms", to: "farms", icon: "MapPin" },
@@ -37,7 +47,7 @@ const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-1">
               {navigation.map((item) => (
-                <NavItem
+<NavItem
                   key={item.name}
                   to={item.to}
                   icon={item.icon}
@@ -45,6 +55,16 @@ const Header = () => {
                   className="px-4 py-2"
                 />
               ))}
+              
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-gray-600 hover:text-gray-900 px-4 py-2"
+                onClick={handleLogout}
+              >
+                <ApperIcon name="LogOut" className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
             </nav>
 
             {/* Mobile menu button */}
@@ -86,7 +106,7 @@ const Header = () => {
                 </button>
               </div>
 
-              <nav className="space-y-2">
+<nav className="space-y-2">
                 {navigation.map((item) => (
                   <NavItem
                     key={item.name}
@@ -96,6 +116,16 @@ const Header = () => {
                     className="w-full justify-start"
                     onClick={() => setIsMobileMenuOpen(false)}
                   />
+                ))}
+                
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start text-gray-600 hover:text-gray-900 mt-4"
+                  onClick={handleLogout}
+                >
+                  <ApperIcon name="LogOut" className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
                 ))}
               </nav>
             </div>

@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { endOfMonth, format, startOfMonth } from "date-fns";
+import weatherService from "@/services/api/weatherService";
+import cropService from "@/services/api/cropService";
+import expenseService from "@/services/api/expenseService";
+import taskService from "@/services/api/taskService";
+import farmService from "@/services/api/farmService";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import Tasks from "@/components/pages/Tasks";
 import StatCard from "@/components/molecules/StatCard";
-import WeatherCard from "@/components/molecules/WeatherCard";
 import TaskItem from "@/components/molecules/TaskItem";
-import Loading from "@/components/ui/Loading";
+import WeatherCard from "@/components/molecules/WeatherCard";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import Button from "@/components/atoms/Button";
-import ApperIcon from "@/components/ApperIcon";
-import farmService from "@/services/api/farmService";
-import cropService from "@/services/api/cropService";
-import taskService from "@/services/api/taskService";
-import expenseService from "@/services/api/expenseService";
-import weatherService from "@/services/api/weatherService";
-import { toast } from "react-toastify";
-import { format, startOfMonth, endOfMonth } from "date-fns";
+import Loading from "@/components/ui/Loading";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const Dashboard = () => {
     setError("");
 
     try {
-      const [farmsData, cropsData, tasksData, expensesData, weatherData] = await Promise.all([
+const [farmsData, cropsData, tasksData, expensesData, weatherData] = await Promise.all([
         farmService.getAll(),
         cropService.getAll(),
         taskService.getAll(),
@@ -59,7 +60,7 @@ const Dashboard = () => {
     }
   };
 
-  const handleTaskComplete = async (taskId) => {
+const handleTaskComplete = async (taskId) => {
     try {
       await taskService.update(taskId, { completed: true, completedAt: new Date().toISOString() });
       toast.success("Task completed!");
@@ -73,7 +74,7 @@ const Dashboard = () => {
   if (error) return <Error message={error} onRetry={loadDashboardData} />;
 
   // Calculate statistics
-  const activeCrops = data.crops.filter(crop => crop.status !== "harvested").length;
+const activeCrops = data.crops.filter(crop => crop.status !== "harvested").length;
   const pendingTasks = data.tasks.filter(task => !task.completed).length;
   const overdueTasks = data.tasks.filter(task => 
     !task.completed && new Date(task.dueDate) < new Date()
@@ -83,6 +84,7 @@ const Dashboard = () => {
   const currentMonth = new Date();
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
+
   const monthlyExpenses = data.expenses
     .filter(expense => {
       const expenseDate = new Date(expense.date);
@@ -90,7 +92,7 @@ const Dashboard = () => {
     })
     .reduce((total, expense) => total + expense.amount, 0);
 
-  const recentTasks = data.tasks
+const upcomingTasks = data.tasks
     .filter(task => !task.completed)
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
     .slice(0, 5);
@@ -152,8 +154,7 @@ const Dashboard = () => {
                 Add Task
               </Button>
             </div>
-
-            {recentTasks.length === 0 ? (
+{upcomingTasks.length === 0 ? (
               <Empty
                 title="No pending tasks"
                 description="All caught up! Add a new task to keep track of farm activities."
@@ -163,7 +164,7 @@ const Dashboard = () => {
               />
             ) : (
               <div className="space-y-4">
-                {recentTasks.map((task) => (
+                {upcomingTasks.map((task) => (
                   <TaskItem
                     key={task.Id}
                     task={task}
@@ -172,7 +173,6 @@ const Dashboard = () => {
                     onDelete={() => navigate("tasks")}
                   />
                 ))}
-                
                 {pendingTasks > 5 && (
                   <div className="text-center pt-4 border-t">
                     <Button variant="ghost" onClick={() => navigate("tasks")}>
